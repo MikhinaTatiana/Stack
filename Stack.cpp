@@ -3,9 +3,7 @@
 #include "List.h"
 #include "Vector.h"
 
-//
-// constructor
-//
+
 Stack::Stack(StackContainer container) {
     _containerType = container;
 
@@ -32,16 +30,12 @@ Stack::Stack(const ValueType* valueArray,
     }
 }
 
-//
-// destructor
-//
+
 Stack::~Stack() {
     delete _pimpl;
 }
 
-//
-// basic methods
-//
+
 void Stack::push(const ValueType& value) {
     _pimpl->push(value);
 }
@@ -62,9 +56,7 @@ size_t Stack::size() const {
     return _pimpl->size();
 }
 
-//
-// copy constructor (explicit!)
-//
+
 Stack::Stack(const Stack& other) {
     _containerType = other._containerType;
 
@@ -75,7 +67,7 @@ Stack::Stack(const Stack& other) {
     }
 
     Stack temp(other._containerType);
-    Stack copy(other);   // ❗ ВАЖНО: не "=", а прямой вызов
+    Stack copy(other);   
 
     while (!copy.isEmpty()) {
         temp.push(copy.top());
@@ -88,9 +80,7 @@ Stack::Stack(const Stack& other) {
     }
 }
 
-//
-// copy assignment
-//
+
 Stack& Stack::operator=(const Stack& other) {
     if (this == &other) return *this;
 
@@ -105,7 +95,7 @@ Stack& Stack::operator=(const Stack& other) {
     }
 
     Stack temp(other._containerType);
-    Stack copy(other);   // ❗ тоже фикс
+    Stack copy(other);   
 
     while (!copy.isEmpty()) {
         temp.push(copy.top());
@@ -120,9 +110,7 @@ Stack& Stack::operator=(const Stack& other) {
     return *this;
 }
 
-//
-// move constructor
-//
+
 Stack::Stack(Stack&& other) noexcept {
     _pimpl = other._pimpl;
     _containerType = other._containerType;
@@ -130,9 +118,7 @@ Stack::Stack(Stack&& other) noexcept {
     other._pimpl = nullptr;
 }
 
-//
-// move assignment
-//
+
 Stack& Stack::operator=(Stack&& other) noexcept {
     if (this == &other) return *this;
 
